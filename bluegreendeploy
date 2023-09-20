@@ -130,3 +130,4 @@ spec:
 export SECURE_INGRESS_PORT=$(kubectl -n "${INGRESS_NS}" get service "${INGRESS_NAME}" -o jsonpath='{.spec.ports[?(@.name=="https")].nodePort}')
 export INGRESS_NAME=istio-ingressgateway
 export INGRESS_NS=istio-system
+https://istio.io/latest/docs/tasks/traffic-management/ingress/ingress-control/#:~:text=Accessing%20ingress%20services%20using%20a%20browser,-Entering%20the%20httpbin&text=Thus%2C%20you%20use%20the%20host's,.com%2Fstatus%2F200%20.&text=You%20can%20then%20use%20%24INGRESS_HOST,headers%20that%20your%20browser%20sends
