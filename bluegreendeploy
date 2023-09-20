@@ -127,3 +127,4 @@ spec:
           subset: v2
         weight: 50        
 ---
+export SECURE_INGRESS_PORT=$(kubectl -n "${INGRESS_NS}" get service "${INGRESS_NAME}" -o jsonpath='{.spec.ports[?(@.name=="https")].nodePort}')
