@@ -128,3 +128,5 @@ spec:
         weight: 50        
 ---
 export SECURE_INGRESS_PORT=$(kubectl -n "${INGRESS_NS}" get service "${INGRESS_NAME}" -o jsonpath='{.spec.ports[?(@.name=="https")].nodePort}')
+export INGRESS_NAME=istio-ingressgateway
+export INGRESS_NS=istio-system
