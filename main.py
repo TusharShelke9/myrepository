@@ -9,7 +9,8 @@ BASE_URL = os.environ["GATEWAY_URL"]
 
 # Positive Test Case 1: Testing "/" endpoint
 def test_hello_world_endpoint():
-  response = requests.get(BASE_URL + "/",verify=False) assert response.status_code == 200
+  response = requests.get(BASE_URL + "/",verify=False) 
+  assert response.status_code == 200
   assert response.text == '{"Hello":"World"}'
   log.info(response.status_code)
 
