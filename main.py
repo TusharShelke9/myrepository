@@ -19,6 +19,7 @@ def test_predict_valid_image():
     image_path = "sample_images/sample-2.png"
     image_data = open(image_path, "rb").read()
     response = requests.post(BASE_URL + "/predict", data=image_data, verify=False)
+    print(response.content)
     assert response.status_code == 200  # You should compare the status_code with 200
 
 # Negative Test Case 1: Testing "/predict" endpoint with no image
