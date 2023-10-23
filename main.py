@@ -14,13 +14,22 @@ def test_hello_world_endpoint():
   assert response.text == '{"Hello":"World"}'
   log.info(response.status_code)
 
-# Positive Test Case 2: Testing "/predict" endpoint with a valid image
 def test_predict_valid_image():
+    # Path to the image file
     image_path = "sample_images/sample-2.png"
-    image_data = open(image_path, "rb").read()
-    response = requests.post(BASE_URL + "/predict", data=image_data, verify=False)
-    print(response.content)
-    assert response.status_code == 200  # You should compare the status_code with 200
+    
+    # Create a multipart/form-data payload with the image file
+    files = {'image_file': (os.path.basename(image_path), open(image_path, 'rb')}
+    
+    # Send the POST request
+    response = requests.post(BASE_URL + "/predict", files=files, verify=False)
+    
+    # Check the response status code
+    assert response.status_code == 200
+    
+    # Check the response JSON
+    data = response.json()
+    assert data == {"predicted_label": 1, "class_name": "1"}
 
 # Negative Test Case 1: Testing "/predict" endpoint with no image
 def test_predict_no_image():
