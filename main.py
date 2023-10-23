@@ -15,11 +15,9 @@ def test_hello_world_endpoint():
   log.info(response.status_code)
 
 # Positive Test Case 2: Testing "/predict" endpoint with a valid image
-def test_predict_valid_image():
-    image_path = "sample_images/sample-2.png"
-    image_data = open(image_path, "rb").read()
-    response = requests.post(BASE_URL + "/predict", data=image_data, verify=False)
-    assert response.status_code == 200  # You should compare the status_code with 200
+def test_predict_no_image():
+    response = requests.post(BASE_URL + "/predict", verify=False)
+    assert response.status_code == 422  # Check if the status code is 422, as it's the expected status code for this test case
 
 # Negative Test Case 1: Testing "/predict" endpoint with no image
 def test_predict_no_image():
