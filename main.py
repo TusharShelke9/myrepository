@@ -14,6 +14,7 @@ def test_hello_world_endpoint():
   assert response.text == '{"Hello":"World"}'
   log.info(response.status_code)
 
+# Positive Test Case 2: Testing "/predict" endpoint with a valid image
 def test_predict_endpoint():
     # Path to the image file
     image_path = "sample_images/sample-2.png"
