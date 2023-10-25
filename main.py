@@ -18,11 +18,16 @@ def test_predict_valid_image():
     # Path to the image file
     image_path = "sample_images/sample-2.png"
     
-    # Create a multipart/form-data payload with the image file
-    files = {'image_file': (os.path.basename(image_path), open(image_path, 'rb')}
+    # Read the image data
+    image_data = open(image_path, 'rb').read()
+    
+    # Set the headers to specify the content type as "image/png"
+    headers = {
+        "Content-Type": "image/png"
+    }
     
     # Send the POST request
-    response = requests.post(BASE_URL + "/predict", files=files, verify=False)
+    response = requests.post(BASE_URL + "/predict", data=image_data, headers=headers, verify=False)
     
     # Check the response status code
     assert response.status_code == 200
