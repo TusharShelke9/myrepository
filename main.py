@@ -19,7 +19,7 @@ def test_predict_endpoint():
     image_path = "sample_images/sample-2.png"
     
     # Create a dictionary with the file data
-    files = {'image_file': (os.path.basename(image_path), open(image_path, 'rb')}
+    files = {'image_file': (os.path.basename(image_path), open(image_path, 'rb'))}
     
     # Send the POST request to /predict
     response = requests.post(BASE_URL + "/predict", files=files, verify=False)
