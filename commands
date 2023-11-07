@@ -1,1 +1,3 @@
 networking.istio.io/exportTo: "*"
+
+openssl s_client -connect kinesis.ap-northeast-2.amazonaws.com:443 -prexit -debug
