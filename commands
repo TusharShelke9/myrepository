@@ -3,3 +3,9 @@ networking.istio.io/exportTo: "*"
 openssl s_client -connect kinesis.ap-northeast-2.amazonaws.com:443 -prexit -debug
 
 https://istio.io/latest/docs/tasks/traffic-management/ingress/ingress-control/
+grep -l c.uri.prefix /usr/share/bdswebui/bdswebui/static-5.6.4-3110/bdswebui/bluedata/bundle/*.js
+sed -i 's#c.uri.exact#c.uri.prefix#g' /usr/share/bdswebui/bdswebui/static-5.6.4-
+3110/bdswebui/bluedata/bundle/71.fcc655d7e09180cc897a.js
+sed -i 's#href:"".concat(c).concat(t)#href:"".concat("https://").concat(c).concat(t)#g' /usr/share/bdswebui/bdswebui/static-5.6.4-
+3110/bdswebui/bluedata/bundle/71.fcc655d7e09180cc897a.js
+systemctl restart httpd
