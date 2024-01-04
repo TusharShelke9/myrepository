@@ -1,0 +1,70 @@
+import pytest
+import logging
+
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+log = logging.getLogger(__name__)
+
+class APIClient:
+    def __init__(self):
+        pass
+
+    def get_data(self):
+        # Simulate getting data
+        return {"status_code": 200, "text": "Hello, World"}
+
+    def post_data(self, data):
+        # Simulate posting data
+        return {"status_code": 200}
+
+class APIClientNegative:
+    def __init__(self):
+        pass
+
+    def get_data(self):
+        # Simulate unexpected behavior: returning a status code other than 200
+        return {"status_code": 404, "text": "Not Found"}
+
+    def post_data(self, data):
+        # Simulate unexpected behavior: handling empty data
+        if not data:
+            return {"status_code": 400, "text": "Bad Request: Empty Data"}
+        # Simulate unexpected behavior: handling data with numeric characters
+        if any(char.isdigit() for char in data):
+            return {"status_code": 500, "text": "Server Error: Numeric Characters"}
+        # Continue with the normal simulation for valid data
+        return {"status_code": 200}
+
+
+# Positive Test Case 1: Testing the get_data method of the API client
+def test_positive_get_data_method():
+    api_client = APIClient()
+    result = api_client.get_data()
+    assert result == {"status_code": 200, "text": "Hello, World"}
+    log.info(result["status_code"])
+
+# Positive Test Case 2: Testing the post_data method of the API client
+def test_positive_post_data_method():
+    api_client = APIClient()
+    result = api_client.post_data("dummy_data")
+    assert result == {"status_code": 200}
+    log.info(result["status_code"])
+
+# Negative Test Case 1: Testing the post_data method with empty data
+def test_negative_handling_empty_data_post_data():
+    api_client_negative = APIClientNegative()
+    result = api_client_negative.post_data("")
+    assert result != {"status_code": 200}
+    log.info(result["status_code"])
+
+# Negative Test Case 2: Verify handling of data with numeric characters in post_data
+def test_negative_handling_numeric_characters_post_data():
+    api_client_negative = APIClientNegative()
+    result = api_client_negative.post_data("123456789")
+    assert result["status_code"] != 200  # Corrected assertion
+    log.info(result["status_code"])
+
+
+
+if __name__ == "__main__":
+    pytest.main()
