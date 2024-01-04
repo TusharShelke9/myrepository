@@ -27,3 +27,6 @@ kubectl create clusterrolebinding sa-cluster-admin --clusterrole=cluster-admin -
 
 21:46
 kubectl get secret my-secret -n my-namespace -o jsonpath='{.data.my-key}' | base64 --decode
+
+kubectl get secret $(kubectl get serviceaccount my-service-account -n my-namespace -o jsonpath='{.secrets[0].name}') -n my-namespace -o jsonpath='{.data.token}' | base64 --decode
+
