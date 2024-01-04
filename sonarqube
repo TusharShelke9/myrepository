@@ -1,0 +1,34 @@
+stage('SonarQube Analysis') {
+  steps {
+    sh 'coverage run -m pytest' // Run tests and collect coverage data
+    sh 'coverage xml' // Generate XML coverage report
+
+    script {
+      withSonarQubeEnv {
+        // Specify SonarQube server details
+        sonarQubeServer = '<SONAR_SERVER_URL>'
+        sonarQubeLogin = '<SONAR_LOGIN>'
+
+        // Define project key and base directory
+        sonarQubeProjectKey = '<PROJECT_KEY>'
+        sonarQubeProjectBaseDir = 'sonar-project.properties' // Adjust if needed
+
+        // Set coverage report path
+        sonarQubeScanner.overrideProperties {
+          ['sonar.python.coverage.reportPaths'] = 'coverage.xml'
+        }
+
+        // Run the Sonar scanner
+        sh 'sonar-scanner'
+      }
+    }
+  }
+  post {
+    success {
+      echo 'SonarQube analysis successful!'
+    }
+    failure {
+      echo 'SonarQube analysis failed!'
+    }
+  }
+}
