@@ -9,3 +9,21 @@ sed -i 's#c.uri.exact#c.uri.prefix#g' /usr/share/bdswebui/bdswebui/static-5.6.4-
 sed -i 's#href:"".concat(c).concat(t)#href:"".concat("https://").concat(c).concat(t)#g' /usr/share/bdswebui/bdswebui/static-5.6.4-
 3110/bdswebui/bluedata/bundle/71.fcc655d7e09180cc897a.js
 systemctl restart httpd
+
+
+
+# Get the cluster URL
+kubectl config view --minify -o jsonpath='{.clusters[0].cluster.server}'
+
+# Get the service account token
+kubectl get secret <service-account-secret-name> -n <namespace> -o jsonpath='{.data.token}' | base64 --decode
+20:17
+kubectl create clusterrolebinding sa-clusterrole-binding --clusterrole=your-cluster-role-name --serviceaccount=your-namespace:your-service-account-name
+kubectl create rolebinding sa-role-binding --role=your-role-name --serviceaccount=your-namespace:your-service-account-name --namespace=your-namespace
+21:01
+kubectl create clusterrolebinding sa-cluster-admin --clusterrole=cluster-admin --serviceaccount=your-namespace:your-service-account-name
+
+21:07
+
+21:46
+kubectl get secret my-secret -n my-namespace -o jsonpath='{.data.my-key}' | base64 --decode
