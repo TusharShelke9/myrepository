@@ -32,3 +32,5 @@ kubectl get secret $(kubectl get serviceaccount my-service-account -n my-namespa
 
 python -m coverage run -m pytest Pytest.py
 python -m coverage html
+
+CMD ["sh", "-c", "python -m coverage run -m pytest main.py && python -m coverage report && python -m coverage xml"]
