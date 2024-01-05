@@ -30,3 +30,5 @@ kubectl get secret my-secret -n my-namespace -o jsonpath='{.data.my-key}' | base
 
 kubectl get secret $(kubectl get serviceaccount my-service-account -n my-namespace -o jsonpath='{.secrets[0].name}') -n my-namespace -o jsonpath='{.data.token}' | base64 --decode
 
+python -m coverage run -m pytest Pytest.py
+python -m coverage html
