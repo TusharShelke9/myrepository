@@ -34,3 +34,6 @@ python -m coverage run -m pytest Pytest.py
 python -m coverage html
 
 CMD ["sh", "-c", "python -m coverage run -m pytest main.py && python -m coverage report && python -m coverage xml"]
+
+
+https://deopcfgnp.corp.hkjc.com/#/templates/job_template/546/details
